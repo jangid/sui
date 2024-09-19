@@ -199,6 +199,11 @@ pub struct NodeConfig {
 
     #[serde(default)]
     pub verifier_signing_config: VerifierSigningConfig,
+
+    /// If a value is set, it determines if writes to DB can stall, which can halt the whole process.
+    /// By default, write stall is enabled on validators but not on fullnodes.
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub enable_db_write_stall: Option<bool>,
 }
 
 #[derive(Clone, Debug, Deserialize, Serialize, Default)]
@@ -265,6 +270,10 @@ pub fn default_zklogin_oauth_providers() -> BTreeMap<Chain, BTreeSet<String>> {
         "Microsoft".to_string(),
         "KarrierOne".to_string(),
         "Credenza3".to_string(),
+        "Playtron".to_string(),
+        "Threedos".to_string(),
+        "Onefc".to_string(),
+        "FanTV".to_string(),
         "AwsTenant-region:us-east-1-tenant_id:us-east-1_LPSLCkC3A".to_string(), // test tenant in mysten aws
         "AwsTenant-region:us-east-1-tenant_id:us-east-1_qPsZxYqd8".to_string(), // ambrus, external partner
     ]);
